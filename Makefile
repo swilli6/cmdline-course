@@ -5,8 +5,9 @@ SENTEDBOOKS=$(BOOKS:%=results/%.sent.txt)
 MAKENOMD=$(BOOKS:%=results/%.no_md.txt)
 ALLFREQ=results/all.freq.txt
 ALLSENT=results/all.sent.txt
+PARSEDBOOKS=$(BOOKS:%=results/%.parsed.txt)
 
-all: $(FREQLISTS) $(SENTEDBOOKS) $(MAKENOMD) $(ALLSENT) $(ALLFREQ)
+all: $(FREQLISTS) $(SENTEDBOOKS) $(MAKENOMD) $(ALLSENT) $(ALLFREQ) $(PARSEDBOOKS)
 
 clean:
 	rm -f results/* data/*no_md.txt
@@ -31,3 +32,6 @@ results/all.freq.txt: results/all.sent.txt
 
 results/all.sent.txt: results/*sent.txt
 	cat $^ > $@
+
+results/%.parsed.txt: results/%.sent.txt
+	cat $< > $@
